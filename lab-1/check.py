@@ -1,10 +1,30 @@
-import argparse
+import argparse, nltk, string
 
-parser = argparse.ArgumentParser(description='file to spell check')
+with open('dictionary.txt') as f:
+    dict = f.read().splitlines()
+
+#for word in dict:
+#    print(word)
+
+parser = argparse.ArgumentParser(description='spell checker')
 
 parser.add_argument('-f',
-                    nargs = 1,
                     type=str,
-                    metavar='<input_file>',
-                    help = 'file which containts text to tweet',
+                    metavar='',
+                    help = 'file to spell check',
                     required = True)
+args = parser.parse_args()
+
+with open(args.f) as f:
+    text = f.read().splitlines()
+
+tokens = []
+
+for line in text:
+    line = line.translate(str.maketrans('','',string.punctuation))
+    line = line.translate(str.maketrans('','','0123456789'))
+    line = nltk.word_tokenize(str(line))
+    for word in line:
+        tokens.append(word)
+
+print(tokens)
