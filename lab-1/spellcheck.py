@@ -15,6 +15,7 @@ parser.add_argument('-f',
                     required = True)
 args = parser.parse_args()
 
+print("Please wait...")
 with open(args.f) as f:
     text = f.read().splitlines()
 
@@ -25,6 +26,8 @@ for line in text:
     line = line.translate(str.maketrans('','','0123456789'))
     line = nltk.word_tokenize(str(line))
     for word in line:
-        tokens.append(word)
+        tokens.append(str(word).lower())
 
-print(tokens)
+for token in tokens:
+    if token not in dict:
+        print(token)
