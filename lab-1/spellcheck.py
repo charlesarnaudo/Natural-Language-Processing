@@ -1,11 +1,5 @@
 import argparse, nltk, string
 
-with open('dictionary.txt') as f:
-    dict = f.read().splitlines()
-
-#for word in dict:
-#    print(word)
-
 parser = argparse.ArgumentParser(description='spell checker')
 
 parser.add_argument('-f',
@@ -15,19 +9,18 @@ parser.add_argument('-f',
                     required = True)
 args = parser.parse_args()
 
-print("Please wait...")
-with open(args.f) as f:
+with open('dictionary.txt', 'r') as f:
+    dictionary = f.read().splitlines()
+
+with open(args.f, 'r') as f:
     text = f.read().splitlines()
-
-tokens = []
-
-for line in text:
-    line = line.translate(str.maketrans('','',string.punctuation))
-    line = line.translate(str.maketrans('','','0123456789'))
-    line = nltk.word_tokenize(str(line))
-    for word in line:
-        tokens.append(str(word).lower())
-
-for token in tokens:
-    if token not in dict:
-        print(token)
+    for line in text:
+        line = line.lower()
+        #line = line.translate(str.maketrans(string.punctuation))
+        #line = line.translate(str.maketrans('0123456789'))
+        line = line.split(" ")
+        for word in line:
+            word = word.translate(str.maketrans('', '', string.punctuation))
+            word = word.translate(str.maketrans('','', '0123456789’‘“”'))
+            if word not in dictionary:
+                print(word)
