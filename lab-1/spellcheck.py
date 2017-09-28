@@ -12,6 +12,10 @@ def insert_char(word, index, c):
         return(word[:index] + c + word[index+1:])
 
 
+def remove_char(word, index):
+    return(word[:index] + word[index+1:])
+
+
 if __name__ == '__main__':
     # ArgumentParser
     parser = argparse.ArgumentParser(description='spell checker')
@@ -43,9 +47,14 @@ if __name__ == '__main__':
     suggestions = list()
     for word in mispelled:
         for index, char in enumerate(word):
+            # Inserting chars
             for c in string.ascii_lowercase:
                 suggestion = insert_char(word, index, c)
                 if suggestion in dictionary:
                     suggestions.append(suggestion)
+            # Removing chars
+            suggestion = remove_char(word, index)
+            if suggestion in dictionary:
+                suggestions.append(suggestion)
 
     print(suggestions)
