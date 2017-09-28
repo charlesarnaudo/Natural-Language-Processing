@@ -56,5 +56,3 @@ if __name__ == '__main__':
             suggestion = remove_char(word, index)
             if suggestion in dictionary:
                 suggestions.append(suggestion)
-
-    print(suggestions)
