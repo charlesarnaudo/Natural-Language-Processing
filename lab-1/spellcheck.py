@@ -21,9 +21,9 @@ def print_suggestions(mispelled, suggestions):
     table = tt.Texttable()
     headings = ['mispelled', 'suggestions']
     table.header(headings)
+
     mispelled = mispelled
     suggestions = suggestions
-
     for row in zip(mispelled, suggestions):
         table.add_row(row)
 
