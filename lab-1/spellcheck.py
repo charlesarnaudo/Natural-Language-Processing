@@ -1,6 +1,7 @@
 import re
 import argparse
 import string
+import texttable as tt
 
 
 def insert_char(word, index, c):
@@ -14,6 +15,19 @@ def insert_char(word, index, c):
 
 def remove_char(word, index):
     return(word[:index] + word[index+1:])
+
+
+def print_suggestions(mispelled, suggestions):
+    table = tt.Texttable()
+    headings = ['mispelled', 'suggestions']
+    table.header(headings)
+    mispelled = mispelled
+    suggestions = suggestions
+
+    for row in zip(mispelled, suggestions):
+        table.add_row(row)
+
+    print(table.draw())
 
 
 if __name__ == '__main__':
@@ -56,3 +70,5 @@ if __name__ == '__main__':
             suggestion = remove_char(word, index)
             if suggestion in dictionary:
                 suggestions.append(suggestion)
+
+    print_suggestions(mispelled, suggestions)
