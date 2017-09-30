@@ -18,14 +18,12 @@ def remove_char(word, index):
 
 
 def switch_char(word, index):
-    #if index == 0 or index == len(word):
-    #    first_char = word[0]
-    #    last_char = word[-1]
-    #    return(last_char + word[1:-1] + first_char)
-    #else:
-    first_char = word[index]
-    second_char = word[index + 1]
-    return(word[:index] + second_char + first_char + word[index + 1:])
+    if index == 0 or index == len(word) - 1:
+        first_char = word[0]
+        last_char = word[-1]
+        return(last_char + word[1:-1] + first_char)
+    else:
+        return(word[:index] + word[index + 1] + word[index] + word[index + 2:])
 
 
 def print_suggestions(mispelled, suggestions):
@@ -83,6 +81,7 @@ if __name__ == '__main__':
                 suggestions.append(suggestion)
             # Switching chars
             switch = switch_char(word, index)
-            print(switch)
+            print(len(word))
+            print(str(index) + " " + word + " " + switch)
 
     print_suggestions(mispelled, suggestions)
