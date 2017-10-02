@@ -5,19 +5,25 @@ import texttable as tt
 
 
 def insert_char(word, index, c):
+    """
+    """
     if index == 0:
         return(c + word)
     elif index + 1 == len(word):
         return(word + c)
     else:
-        return(word[:index] + c + word[index+1:])
+        return(word[:index] + c + word[index + 1:])
 
 
 def remove_char(word, index):
-    return(word[:index] + word[index+1:])
+    """
+    """
+    return(word[:index] + word[index + 1:])
 
 
 def switch_char(word, index):
+    """
+    """
     if index == 0 or index == len(word) - 1:
         first_char = word[0]
         last_char = word[-1]
@@ -27,6 +33,8 @@ def switch_char(word, index):
 
 
 def print_suggestions(mispelled, suggestions):
+    """
+    """
     table = tt.Texttable()
     headings = ['mispelled', 'suggestions']
     table.header(headings)
