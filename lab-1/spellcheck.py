@@ -1,6 +1,4 @@
-import re
 import argparse
-import string
 import spellfuncs
 import texttable as tt
 
@@ -16,7 +14,6 @@ def print_suggestions(mispelled, suggestions):
     suggestions = suggestions
     for row in zip(mispelled, suggestions):
         table.add_row(row)
-
     print(table.draw())
 
 
@@ -45,26 +42,3 @@ if __name__ == '__main__':
                 word = spellfuncs.spellcheck(word)
                 if word not in dictionary:
                     mispelled.append(word)
-
-
-    ## Spell suggestions
-    suggestions = spellfuncs.suggestions(mispelled)
-    print(suggestions)
-
-    #for word in mispelled:
-    #    for index, char in enumerate(word):
-    #        # Inserting chars
-    #        for c in string.ascii_lowercase:
-    #            suggestion = insert_char(word, index, c)
-    #            if suggestion in dictionary:
-    #                suggestions.append(suggestion)
-    #        # Removing chars
-    #        suggestion = remove_char(word, index)
-    #        if suggestion in dictionary:
-    #            suggestions.append(suggestion)
-    #        # Switching chars
-    #        switch = switch_char(word, index)
-    #        print(len(word))
-    #        print(str(index) + " " + word + " " + switch)
-
-    #print_suggestions(mispelled, suggestions)

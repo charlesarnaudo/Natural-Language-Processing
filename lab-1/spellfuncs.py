@@ -2,7 +2,6 @@ import re
 import string
 
 
-#def suggestion(word):
 class SpellFuncs:
     def __init__(self, dictionary):
         self.dictionary = dictionary
