@@ -1,35 +1,8 @@
 import re
 import argparse
 import string
+import spellfuncs
 import texttable as tt
-
-
-def insert_char(word, index, c):
-    """
-    """
-    if index == 0:
-        return(c + word)
-    elif index + 1 == len(word):
-        return(word + c)
-    else:
-        return(word[:index] + c + word[index + 1:])
-
-
-def remove_char(word, index):
-    """
-    """
-    return(word[:index] + word[index + 1:])
-
-
-def switch_char(word, index):
-    """
-    """
-    if index == 0 or index == len(word) - 1:
-        first_char = word[0]
-        last_char = word[-1]
-        return(last_char + word[1:-1] + first_char)
-    else:
-        return(word[:index] + word[index + 1] + word[index] + word[index + 2:])
 
 
 def print_suggestions(mispelled, suggestions):
@@ -57,8 +30,11 @@ if __name__ == '__main__':
                         required=True)
     args = parser.parse_args()
 
+
     with open('dictionary.txt', 'r') as f:
         dictionary = f.read().splitlines()
+
+    spellfuncs = spellfuncs.SpellFuncs(dictionary)
 
     # Spell checking
     mispelled = list()
@@ -66,30 +42,29 @@ if __name__ == '__main__':
         for line in f:
             words = line.split()
             for word in words:
-                if re.findall(r"[0-9]", word):
-                    continue
-                word = word.lower()
-                word = word.translate(str.maketrans('', '',
-                                                    string.punctuation))
+                word = spellfuncs.spellcheck(word)
                 if word not in dictionary:
                     mispelled.append(word)
 
-    # Spell suggestions
-    suggestions = list()
-    for word in mispelled:
-        for index, char in enumerate(word):
-            # Inserting chars
-            for c in string.ascii_lowercase:
-                suggestion = insert_char(word, index, c)
-                if suggestion in dictionary:
-                    suggestions.append(suggestion)
-            # Removing chars
-            suggestion = remove_char(word, index)
-            if suggestion in dictionary:
-                suggestions.append(suggestion)
-            # Switching chars
-            switch = switch_char(word, index)
-            print(len(word))
-            print(str(index) + " " + word + " " + switch)
 
-    print_suggestions(mispelled, suggestions)
+    ## Spell suggestions
+    suggestions = spellfuncs.suggestions(mispelled)
+    print(suggestions)
+
+    #for word in mispelled:
+    #    for index, char in enumerate(word):
+    #        # Inserting chars
+    #        for c in string.ascii_lowercase:
+    #            suggestion = insert_char(word, index, c)
+    #            if suggestion in dictionary:
+    #                suggestions.append(suggestion)
+    #        # Removing chars
+    #        suggestion = remove_char(word, index)
+    #        if suggestion in dictionary:
+    #            suggestions.append(suggestion)
+    #        # Switching chars
+    #        switch = switch_char(word, index)
+    #        print(len(word))
+    #        print(str(index) + " " + word + " " + switch)
+
+    #print_suggestions(mispelled, suggestions)
