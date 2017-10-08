@@ -27,7 +27,6 @@ if __name__ == '__main__':
                         required=True)
     args = parser.parse_args()
 
-
     with open('dictionary.txt', 'r') as f:
         dictionary = f.read().splitlines()
 
@@ -42,3 +41,10 @@ if __name__ == '__main__':
                 word = spellfuncs.spellcheck(word)
                 if word not in dictionary:
                     mispelled.append(word)
+
+    suggestions = {}
+    for word in mispelled:
+        word_suggestions = spellfuncs.suggestions(word)
+        suggestions.update({word: word_suggestions})
+
+    print(suggestions)

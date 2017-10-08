@@ -16,10 +16,11 @@ class SpellFuncs:
 
     def suggestions(self, mispelled):
         suggestions = list()
-        for word in mispelled:
-            suggestions += self.insert_char(word)
-        return(suggestions)
 
+        suggestions += self.insert_char(mispelled)
+        suggestions += self.remove_char(mispelled)
+        suggestions += self.switch_char(mispelled)
+        return(suggestions)
 
     def insert_char(self, word):
         """
@@ -43,21 +44,31 @@ class SpellFuncs:
                         suggestions.append(temp)
         return(suggestions)
 
-
-    def remove_char(word, index):
+    def remove_char(self, word):
         """
         """
+        dictionary = self.dictionary
         suggestions = list()
         for index, char in enumerate(word):
-            return(word[:index] + word[index + 1:])
+            temp = (word[:index] + word[index + 1:])
+            if temp in dictionary:
+                suggestions.append(temp)
+        return(suggestions)
 
-
-    def switch_char(word, index):
+    def switch_char(self, word):
         """
         """
-        if index == 0 or index == len(word) - 1:
-            first_char = word[0]
-            last_char = word[-1]
-            return(last_char + word[1:-1] + first_char)
-        else:
-            return(word[:index] + word[index + 1] + word[index] + word[index + 2:])
+        dictionary = self.dictionary
+        suggestions = list()
+        for index, char in enumerate(word):
+            if index == 0 or index == len(word) - 1:
+                first_char = word[0]
+                last_char = word[-1]
+                temp = (last_char + word[1:-1] + first_char)
+                if temp in dictionary:
+                    suggestions.append(temp)
+            else:
+                temp = (word[:index] + word[index + 1] + word[index] + word[index + 2:])
+                if temp in dictionary:
+                    suggestions.append(temp)
+        return(suggestions)
