@@ -69,7 +69,6 @@ class SpellFuncs:
             else:
                 temp = (word[:index] + word[index + 1] +
                         word[index] + word[index + 2:])
-
                 if temp in dictionary:
                     suggestions.append(temp)
         return(suggestions)
