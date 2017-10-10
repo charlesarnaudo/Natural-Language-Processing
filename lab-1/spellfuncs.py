@@ -8,7 +8,7 @@ class SpellFuncs:
 
     def clean_word(self, word):
         """
-        Cleans word of punctuations and numbers
+        Returns word without punctuations and numbers
         """
         if re.findall(r"[0-9]", word):
             pass
@@ -33,7 +33,8 @@ class SpellFuncs:
 
     def suggestions(self, mispelled):
         """
-        Given a list of mispelled words, returns suggesstions for those words
+        Given a list of mispelled words, returns a list of
+        suggesstions for those words
         """
         suggestions = list()
         suggestions += self.insert_char(mispelled)
@@ -43,8 +44,8 @@ class SpellFuncs:
 
     def insert_char(self, word):
         """
-        Inserts a char in each index of a word, and returns cases where
-        the insert is a correct word
+        Inserts a char in each index of a word, and returns a list of
+        words where the insert is a correct word
         """
         dictionary = self.dictionary
         suggestions = list()
@@ -67,8 +68,8 @@ class SpellFuncs:
 
     def remove_char(self, word):
         """
-        Removes a char in each index of a word, and returns cases where
-        the remove is a correct word
+        Removes a char in each index of a word, and returns a list of words
+        where removing a char produces a correct word
         """
         dictionary = self.dictionary
         suggestions = list()
@@ -81,7 +82,7 @@ class SpellFuncs:
     def switch_char(self, word):
         """
         Creates all possible permutations of characters in a word, and returns
-        cases where the permutation is a correct word
+        a list of words where the permutation is a correct word
         """
         dictionary = self.dictionary
         suggestions = list()
