@@ -7,12 +7,27 @@ class SpellFuncs:
         self.dictionary = dictionary
 
     def spellcheck(self, word):
+        """
+        """
         if re.findall(r"[0-9]", word):
             pass
         word = word.lower()
         word = word.translate(str.maketrans('', '',
                                             string.punctuation))
         return(word)
+
+    def misspelled(self, file):
+        """
+        """
+        mispelled = list()
+        dictionary = self.dictionary
+        for line in file:
+            words = line.split()
+            for word in words:
+                word = self.spellcheck(word)
+                if word not in dictionary:
+                    mispelled.append(word)
+        return(mispelled)
 
     def suggestions(self, mispelled):
         suggestions = list()

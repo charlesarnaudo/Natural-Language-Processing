@@ -33,14 +33,8 @@ if __name__ == '__main__':
     spellfuncs = spellfuncs.SpellFuncs(dictionary)
 
     # Spell checking
-    mispelled = list()
     with open(args.f, 'r') as f:
-        for line in f:
-            words = line.split()
-            for word in words:
-                word = spellfuncs.spellcheck(word)
-                if word not in dictionary:
-                    mispelled.append(word)
+        mispelled = spellfuncs.misspelled(f)
 
     suggestions = {}
     for word in mispelled:
