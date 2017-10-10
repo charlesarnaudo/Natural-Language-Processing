@@ -1,21 +1,6 @@
 import argparse
 import spellfuncs
-import texttable as tt
-
-
-def print_suggestions(mispelled, suggestions):
-    """
-    """
-    table = tt.Texttable()
-    headings = ['mispelled', 'suggestions']
-    table.header(headings)
-
-    mispelled = mispelled
-    suggestions = suggestions
-    for row in zip(mispelled, suggestions):
-        table.add_row(row)
-    print(table.draw())
-
+import pprint
 
 if __name__ == '__main__':
     # ArgumentParser
@@ -27,6 +12,7 @@ if __name__ == '__main__':
                         required=True)
     args = parser.parse_args()
 
+    # Create dictionary
     with open('dictionary.txt', 'r') as f:
         dictionary = f.read().splitlines()
 
@@ -41,4 +27,4 @@ if __name__ == '__main__':
         word_suggestions = spellfuncs.suggestions(word)
         suggestions.update({word: word_suggestions})
 
-    print(suggestions)
+    pprint.pprint(suggestions)
