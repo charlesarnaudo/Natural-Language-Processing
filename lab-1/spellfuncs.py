@@ -4,7 +4,7 @@ import string
 
 class SpellFuncs:
     def __init__(self, dictionary):
-        self.dictionary = dictionary
+        self.dictionary = dictionary.read().splitlines()
 
     def clean_word(self, word):
         """
@@ -16,6 +16,10 @@ class SpellFuncs:
         word = word.translate(str.maketrans('', '',
                                             string.punctuation))
         return(word)
+
+    def create_dictonary(self, file):
+        dictionary = file.read().splitlines()
+        return(dictionary)
 
     def misspelled(self, file):
         """

@@ -13,10 +13,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Create dictionary
-    with open('dictionary.txt', 'r') as f:
-        dictionary = f.read().splitlines()
-
-    spellfuncs = spellfuncs.SpellFuncs(dictionary)
+    with open('dictionary.txt', 'r') as dictionary:
+        spellfuncs = spellfuncs.SpellFuncs(dictionary)
 
     # Spell checking
     with open(args.f, 'r') as f:
