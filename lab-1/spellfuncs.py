@@ -18,9 +18,8 @@ class SpellFuncs:
                                             string.punctuation))
         return(word)
 
-    def create_dictonary(self, file):
-        dictionary = file.read().splitlines()
-        return(dictionary)
+    def tokenize(self):
+        return(self.dictionary)
 
     def misspelled(self, file):
         """

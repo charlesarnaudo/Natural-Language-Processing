@@ -16,5 +16,4 @@ if __name__ == '__main__':
         spellfuncs = spellfuncs.SpellFuncs(f)
         tokens = spellfuncs.tokenize()
         tokens = spellfuncs.remove_function_words(tokens)
-
-    print(tokens)
+        spellfuncs.concord()

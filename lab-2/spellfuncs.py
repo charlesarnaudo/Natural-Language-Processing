@@ -1,9 +1,10 @@
 import re
 import string
+import pprint
 from nltk.corpus import stopwords
 
 class SpellFuncs:
-
+   
     def __init__(self, file):
         self.file = file.read().splitlines()
         self.stops = stopwords.words('english')
@@ -21,6 +22,21 @@ class SpellFuncs:
     def remove_function_words(self, tokens):
         for word in tokens:
             if word in self.stops:
-                print(word)
                 tokens.remove(word)
         return(tokens)
+
+    def concord(self):
+        tokens = self.tokenize()
+        words = self.remove_function_words(tokens)
+        d = {}
+
+        text = self.tokenize()
+        for line in text:
+            for word in words:
+                if word in line:
+                    if word not in d:
+                        d[word] = 1
+                    else:
+                        d[word] += 1
+        print(d)
+        
