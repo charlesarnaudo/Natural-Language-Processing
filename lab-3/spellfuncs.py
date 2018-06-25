@@ -3,6 +3,7 @@ import sys
 import string
 import pprint
 
+
 class SpellFuncs:
 
     def __init__(self, file):
@@ -28,7 +29,7 @@ class SpellFuncs:
             for token in token_copy:
                 self.markov[word].append(token)
             i += 1
-    
+
     def print_chain(self, num_of_lines):
         for i in range(num_of_lines):
             key = random.choice(list(self.markov.keys()))
